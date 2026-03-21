@@ -9,8 +9,8 @@
     shellWrapperName = "y";
 
     plugins = {
-      git = pkgs.yaziPlugins.git;      # 使用 Nixpkgs 里的版本
-      mount = pkgs.yaziPlugins.mount;  # 如果 Nixpkgs 已收录
+      git = pkgs.yaziPlugins.git;
+      mount = pkgs.yaziPlugins.mount;
     };
   };
 
