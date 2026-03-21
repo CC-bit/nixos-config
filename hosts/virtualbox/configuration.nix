@@ -101,4 +101,23 @@
 
   # Install firefox.
   programs.firefox.enable = true;
+
+  # 启用 nh 模块
+  programs.nh = {
+    enable = true;
+    # 告诉 nh 你的 flake 配置在哪里，这样以后只需要运行 `nh os switch`
+    flake = "/home/dhzp/.config/nixos"; # 请修改为你实际的 flake 存放路径
+    # 可选：配置自动清理旧的系统版本
+    clean = {
+      enable = true;
+      extraArgs = "--keep-since 4d --keep 3"; # 保留最近4天的版本，或至少保留3个版本
+    };
+  };
+
+  # nh 的运行依赖于 nix-output-monitor 和 nvd (用于显示更新差异)
+  # 虽然 programs.nh 会自动处理一部分，但建议把它们也显式加上
+  environment.systemPackages = with pkgs; [
+    nix-output-monitor
+    nvd
+  ];
 }
