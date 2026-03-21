@@ -4,7 +4,8 @@
     ../../modules/home/shell.nix     # 通用 Fish 配置
     ../../modules/home/terminal.nix  # 通用 Alacritty 配置
     ../../modules/home/editor.nix    # 通用 Neovim 配置
-    ../../modules/home/git.nix      # git
+    ../../modules/home/git.nix       # git
+    ../../modules/home/githubCli.nix # github-cli
   ];
 
   home.username = "dhzp";
