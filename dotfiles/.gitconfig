@@ -1,4 +1,5 @@
-
+[init]
+    defaultBranch = main
 [user]
 	email = dhzp.zh@outlook.com
 	name = CC-bit

@@ -15,6 +15,15 @@
   networking.networkmanager.enable = true;
   networking.hostName = "nixos"; # Define your hostname.    
 
+  fonts.packages = with pkgs; [
+    # JetBrains Mono (Nerd Font 版本，包含图标)
+    nerd-fonts.jetbrains-mono
+    
+    # 文泉驿 (中文字体)
+    wqy_zenhei
+    wqy_microhei
+  ];
+
   time.timeZone = "Asia/Shanghai"; # Set your time zone.
   # Select internationalisation properties.
   i18n.defaultLocale = "zh_CN.UTF-8";

@@ -9,7 +9,13 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     # Zen Browser 的 Flake 源
-    zen-browser.url = "github:0xc000022070/zen-browser-flake";
+    zen-browser = {
+      url = "github:0xc000022070/zen-browser-flake";
+      # 强制 zen-browser 使用你定义的 nixpkgs，避免生成 nixpkgs_2
+      inputs.nixpkgs.follows = "nixpkgs";
+      # 强制 zen-browser 使用你定义的 home-manager，避免生成 home-manager_2
+      inputs.home-manager.follows = "home-manager";
+    };
   };
 
   outputs = { self, nixpkgs, home-manager, zen-browser, ... }@inputs: {
