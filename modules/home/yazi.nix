@@ -7,6 +7,11 @@
     enableFishIntegration = true;
     # 如果你习惯输入 'y' 启动 yazi，可以设置：
     shellWrapperName = "y";
+
+    plugins = {
+      git = pkgs.yaziPlugins.git;      # 使用 Nixpkgs 里的版本
+      mount = pkgs.yaziPlugins.mount;  # 如果 Nixpkgs 已收录
+    };
   };
 
   # 将整个 dotfiles/yazi 文件夹递归链接到 ~/.config/yazi
