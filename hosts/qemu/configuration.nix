@@ -71,7 +71,7 @@
   users.users.dhzp = {
     isNormalUser = true;
     description = "dhzp";
-    extraGroups = [ "networkmanager" "wheel" "vboxsf" ];
+    extraGroups = [ "networkmanager" "wheel" ];
     shell = pkgs.fish;
   };
   
