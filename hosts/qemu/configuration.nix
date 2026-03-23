@@ -124,5 +124,32 @@
   environment.systemPackages = with pkgs; [
     nix-output-monitor
     nvd
+    spice-vdagent
   ];
+
+  # 3. 定义一个系统级的“用户服务” (Systemd User Service)
+  # 这会强制在每个用户登录图形界面时启动剪贴板代理
+  systemd.user.services.spice-vdagent = {
+    description = "Spice session guest agent (Clipboard sharing)";
+    # 确保在图形界面准备好后再启动
+    wantedBy = [ "graphical-session.target" ];
+    partOf = [ "graphical-session.target" ];
+    after = [ "graphical-session.target" ];
+    serviceConfig = {
+      # -x 参数非常重要：它能解决很多 Wayland/X11 混合环境下的连接问题
+      ExecStart = "${pkgs.spice-vdagent}/bin/spice-vdagent -x";
+      Restart = "on-failure";
+    };
+  };
+
+  # 1.5x resolution
+  # 1. 确保 dconf 已启用（通常启用 GNOME 时会自动开启，但建议显式声明）
+  programs.dconf.enable = true;
+  # 2. 系统级 GSettings 覆盖
+  services.xserver.desktopManager.gnome.extraGSettingsOverrides = ''
+    [org.gnome.mutter]
+    experimental-features=['scale-monitor-framebuffer']
+    [org.gnome.settings-daemon.plugins.xsettings]
+    overrides={'Gdk/WindowScalingFactor': <2>}
+  '';
 }
